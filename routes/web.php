@@ -12,3 +12,9 @@
 */
 
 Route::get('/', "TopController@index");
+
+Route::get("/login", "UserController@login_page");
+Route::post("/user_login", "UserController@login");
+
+Route::get("/register", "UserController@register_page");
+Route::post("/user_register", "UserController@register");
