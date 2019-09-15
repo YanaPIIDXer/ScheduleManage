@@ -27,7 +27,9 @@ class UserController extends Controller
             return redirect("/login")->with("flash_message", "ログインに失敗しました。");
         }
 
-        return redirect("/");
+        session()->put("user", $user);
+
+        return redirect("/member/index");
     }
 
     public function register_page()
@@ -44,5 +46,11 @@ class UserController extends Controller
         $user->save();
 
         return redirect("/");
+    }
+
+    public function logout(Request $request)
+    {
+        session()->forget("user");
+        return redirect("/")->with("flash_message", "ログアウトしました。");
     }
 }
