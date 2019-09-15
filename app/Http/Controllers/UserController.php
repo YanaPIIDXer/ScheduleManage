@@ -10,7 +10,24 @@ class UserController extends Controller
 {
     public function login_page()
     {
-        return "Login Page";
+        return view("user.login");
+    }
+
+    public function login(UserRequest $request)
+    {
+        $user = User::where("user_id" , "=" , $request->user_id)->get()->toArray();
+        if(empty($user))
+        {
+            return redirect("/login")->with("flash_message", "ログインに失敗しました。");
+        }
+
+        $is_match_password = password_verify($request->password, $user[0]['password']);
+        if(!$is_match_password)
+        {
+            return redirect("/login")->with("flash_message", "ログインに失敗しました。");
+        }
+
+        return redirect("/");
     }
 
     public function register_page()
