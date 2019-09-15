@@ -15,10 +15,13 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("user_id");
-            $table->string("password");
+            $table->char("user_id", 16)->unique();
+            $table->char("password", 16);
             $table->timestamps();
         });
+        
+        DB::statement("alter table users modify user_id varchar(16) binary");
+        DB::statement("alter table users modify password varchar(16) binary");
     }
 
     /**
