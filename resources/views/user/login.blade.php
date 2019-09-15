@@ -2,9 +2,6 @@
 
 @section("Content")
 <h1>スケジュール管理システム ログイン</h1>
-@if (session("flash_message"))
-    <span class="flash_message">{{ session("flash_message") }}</span>
-@endif
 <form method="POST" action="{{ url('user_login') }}">
     {{ csrf_field() }}
     ユーザＩＤ：<input type="text" name="user_id"><br />
