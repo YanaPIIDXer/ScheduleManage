@@ -2,7 +2,7 @@
 
 @section("Content")
 <h1>スケジュール管理システム ログイン</h1>
-<form method="POST" action="{{ url('user_login') }}">
+<form method="POST" action="{{ url('/user_login') }}">
     {{ csrf_field() }}
     ユーザＩＤ：<input type="text" name="user_id"><br />
     @if ($errors->has("user_id"))

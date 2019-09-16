@@ -17,7 +17,7 @@
         <td>{{ $schedule->start_time }}</td>
         <td>{{ $schedule->end_time }}</td>
         <td>
-            <form method="POST" action="{{ url('member/delete_schedule') }}">
+            <form method="POST" action="{{ url('/member/delete_schedule') }}">
                 {{ csrf_field() }}
                 <input type="hidden" name="id" value="{{ $schedule->id }}">
                 <input type="submit" value="消去">
@@ -26,6 +26,6 @@
     </tr>
 @endforeach
 </table><br />
-<a href="{{ url('member/delete_ended_schedule') }}"><input type="button" value="終了したスケジュールを全て削除"></a><br /><br />
-<a href="{{ url('member/index') }}">戻る</a><br />
+<a href="{{ url('/member/delete_ended_schedule') }}"><input type="button" value="終了したスケジュールを全て削除"></a><br /><br />
+<a href="{{ url('/member/index') }}">戻る</a><br />
 @endsection

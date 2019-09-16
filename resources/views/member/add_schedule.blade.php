@@ -35,5 +35,5 @@
     @endif
     <input type="submit" value="登録">
 </form>
-<a href="{{ url('member/index') }}">戻る</a><br />
+<a href="{{ url('/member/index') }}">戻る</a><br />
 @endsection
