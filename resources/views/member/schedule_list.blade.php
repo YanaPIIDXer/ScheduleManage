@@ -26,5 +26,6 @@
     </tr>
 @endforeach
 </table><br />
+<a href="{{ url('member/delete_ended_schedule') }}"><input type="button" value="終了したスケジュールを全て削除"></a><br /><br />
 <a href="{{ url('member/index') }}">戻る</a><br />
 @endsection

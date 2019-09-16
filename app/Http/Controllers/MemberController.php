@@ -84,4 +84,26 @@ class MemberController extends Controller
         }
         return redirect("/member/schedule_list")->with("flash_message", $message);
     }
+
+    public function delete_ended_schedule()
+    {
+        $user = session()->get("user", null);
+        if($user == null)
+        {
+            return redirect("/")->with("flash_message", "不正なアクセスです。");
+        }
+
+        $query = $user->schedules()->where("date", "<", date("Y/m/d"));
+        $query->orWhere(function($q)
+        {
+            $q->where("date", "=", date("Y/m/d"))->where("end_time", "<", date("H:i:s"));
+        });
+
+        $message = "消去しました。";
+        if(!$query->delete())
+        {
+            $message = "消去に失敗しました。";
+        }
+        return redirect("/member/schedule_list")->with("flash_message", $message);
+    }
 }
