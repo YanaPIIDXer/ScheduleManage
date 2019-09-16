@@ -17,6 +17,10 @@
 </script>
 <form method="POST" action="{{ url('/member/add_schedule') }}">
     {{ csrf_field() }}
+    タイトル：<input type="text" name="title"><br />
+    @if ($errors->has("title"))
+        <span class="error">{{ $errors->first("title") }}</span><br />
+    @endif
     日付：<input type="text" id="date" name="date"><br />
     @if ($errors->has("date"))
         <span class="error">{{ $errors->first("date") }}</span><br />

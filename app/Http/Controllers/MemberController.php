@@ -35,6 +35,7 @@ class MemberController extends Controller
     {
         $this->validate($request,
         [
+            'title' => 'required',
             'date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required|after:' . $request->start_time,
@@ -46,7 +47,7 @@ class MemberController extends Controller
             return redirect("/")->with("flash_message", "不正なアクセスです。");
         }
 
-        $schedule = new Schedule(['date' => $request->date, 'start_time' => $request->start_time, 'end_time' => $request->end_time]);
+        $schedule = new Schedule(['title' => $request->title, 'date' => $request->date, 'start_time' => $request->start_time, 'end_time' => $request->end_time]);
         $message = "追加しました。";
         if(!$user->schedules()->save($schedule))
         {
@@ -63,7 +64,24 @@ class MemberController extends Controller
         {
             return redirect("/")->with("flash_message", "不正なアクセスです。");
         }
-        
-        return view("member.schedule_list");
+
+        $schedules = $user->schedules()->get();
+        return view("member.schedule_list")->with("schedules", $schedules);
+    }
+
+    public function delete_schedule(Request $request)
+    {
+        $user = session()->get("user", null);
+        if($user == null)
+        {
+            return redirect("/")->with("flash_message", "不正なアクセスです。");
+        }
+
+        $message = "消去しました。";
+        if(!$user->schedules()->find($request->id)->delete())
+        {
+            $message = "消去に失敗しました。";
+        }
+        return redirect("/member/schedule_list")->with("flash_message", $message);
     }
 }
