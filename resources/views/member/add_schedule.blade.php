@@ -1,11 +1,11 @@
 @extends("layouts/view")
 
 @section("Content")
-<link rel="stylesheet" href="/css/jquery-ui.min.css">
-<link rel="stylesheet" href="/css/jquery.timepicker.min.css">
-<script src="/js/jquery.min.js"></script>
-<script src="/js/jquery-ui.min.js"></script>
-<script src="/js/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css') }}">
+<link rel="stylesheet" href="{{ asset('/css/jquery.timepicker.min.css') }}">
+<script src="{{ asset('/js/jquery.min.js') }}"></script>
+<script src="{{ asset('/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('/js/jquery.timepicker.min.js') }}"></script>
 <h1>スケジュール管理システム　スケジュール登録</h1>
 <script type="text/javascript">
     $(function()
