@@ -15,19 +15,21 @@ class UserController extends Controller
 
     public function login(UserRequest $request)
     {
-        $user = User::where("user_id" , "=" , $request->user_id)->get()->toArray();
-        if(empty($user))
+        $user = User::where("user_id" , "=" , $request->user_id)->first();
+        if(!$user)
         {
             return redirect("/login")->with("flash_message", "ログインに失敗しました。");
         }
 
-        $is_match_password = password_verify($request->password, $user[0]['password']);
+        $is_match_password = password_verify($request->password, $user->password);
         if(!$is_match_password)
         {
             return redirect("/login")->with("flash_message", "ログインに失敗しました。");
         }
 
-        return redirect("/");
+        session()->put("user", $user);
+
+        return redirect("/member/index");
     }
 
     public function register_page()
@@ -44,5 +46,11 @@ class UserController extends Controller
         $user->save();
 
         return redirect("/");
+    }
+
+    public function logout(Request $request)
+    {
+        session()->forget("user");
+        return redirect("/")->with("flash_message", "ログアウトしました。");
     }
 }
