@@ -22,8 +22,8 @@ Route::post("/user_register", "UserController@register");
 Route::get("/member/index", "MemberController@index");
 
 Route::get("/member/add_schedule", "MemberController@add_schedule_page");
+Route::post("/member/add_schedule", "MemberController@add_schedule");
 
 Route::get("/member/schedule_list", "MemberController@schedule_list_page");
-
 
 Route::get("/logout", "UserController@logout");
