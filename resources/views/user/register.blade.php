@@ -1,18 +1,38 @@
 @extends("layouts/view")
 
 @section("Content")
-<h1>スケジュール管理システム ユーザ登録</h1>
+<h1 class="text-center">スケジュール管理システム ユーザ登録</h1>
 <form method="POST" action="{{ url('/user_register') }}">
     {{ csrf_field() }}
-    ユーザＩＤ：<input type="text" name="user_id"><br />
-    @if ($errors->has("user_id"))
-        <span class="error">{{ $errors->first("user_id") }}</span><br />
-    @endif
-    パスワード：<input type="password" name="password"><br />
-    @if ($errors->has("password"))
-        <span class="error">{{ $errors->first("password") }}</span><br />
-    @endif
-    <input type="submit" value="登録">
+    <div class="container">
+        <div class="form-group row">
+            <label for="user_id" class="col-md-2 offset-3 col-form-label">
+                ユーザＩＤ
+            </label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="user_id"><br />
+            </div>
+            @if ($errors->has("user_id"))
+                <span class="col-md-12 error">{{ $errors->first("user_id") }}</span><br />
+            @endif
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-md-2 offset-3 col-form-label">
+                パスワード
+            </label>
+            <div class="col-md-4">
+                <input type="password" class="form-control" name="password"><br />
+            </div>
+            @if ($errors->has("password"))
+                <span class="error">{{ $errors->first("password") }}</span><br />
+            @endif
+        </div>
+        <div class="form-group row justify-content-end">
+            <div class="col-md-7">
+                <input type="submit" class="btn btn-primary" value="登録">
+            </div>
+        </div>
+    </div>
 </form>
 <a href="{{ url('/') }}">戻る</a><br />
 @endsection
